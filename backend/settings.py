@@ -29,9 +29,8 @@ SECRET_KEY = 'django-insecure-m((n8p38s%_8lt#b$#l)g9(fzl599mo9d4snh_#wk!_a50&bl$
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'localhost',    
     '127.0.0.1',  
-    'react-blog-si6j.onrender.com',  
+    '.vercel.app',  
 ]
 
 
