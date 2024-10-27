@@ -4,6 +4,8 @@ from django.core.validators import FileExtensionValidator
 from django.utils.text import slugify
 from django.core.validators import RegexValidator
 from taggit.managers import TaggableManager
+from cloudinary.models import CloudinaryField
+
 
 
 
@@ -37,11 +39,10 @@ class UserProfile(models.Model):
     phone_number = models.CharField(validators=[phone_regex], max_length=17, unique=True, default=True, null=True)
     birthday = models.DateField(null=True, blank=True)
     bio = models.TextField(max_length=500, blank=True)
-    profile_picture = models.ImageField(
-        upload_to='profile_pics/',
-        null=True, blank=True, default='',
-        validators=[FileExtensionValidator(['png', 'jpg'])]
-    )
+    profile_picture = CloudinaryField('image', 
+                                       null=True, 
+                                       blank=True, 
+                                       validators=[FileExtensionValidator(['png', 'jpg'])])
     facebook_url = models.URLField(max_length=255, blank=True, null=True)
     instagram_url = models.URLField(max_length=255, blank=True, null=True)
 
@@ -53,7 +54,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100, null=True,blank=True)
     content = models.TextField()
-    post_image = models.ImageField(upload_to='post_image',null=True,blank=True)
+    post_image = CloudinaryField('image', null=True, blank=True) 
     slug = models.SlugField(unique=True, max_length=250,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     tags = TaggableManager() 
